@@ -1,0 +1,20 @@
+{
+  "name": "play-room",
+  "version": "1.0.0",
+  "description": "放映厅的服务端",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only ./src/app.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/koa": "^2.13.4",
+    "awilix": "^6.1.0",
+    "awilix-koa": "^6.0.0",
+    "koa": "^2.13.4",
+    "mysql-curd": "^1.0.3",
+    "ts-node-dev": "^1.1.8"
+  }
+}

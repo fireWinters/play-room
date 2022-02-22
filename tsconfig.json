@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "strictNullChecks": true,
+
+        "experimentalDecorators": true,
+        "esModuleInterop": true,
+
+        "moduleResolution": "Node"
+    },
+    "include": ["src/*", "code/*"]
+}
