@@ -4,16 +4,24 @@
   "description": "放映厅的服务端",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only ./src/app.ts"
+    "dev": "ts-node-dev --respawn --transpile-only ./src/app.ts",
+    "test": "jest",
+    "test:ui": "majestic"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/core": "^7.17.5",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-typescript": "^7.16.7",
     "@types/koa": "^2.13.4",
     "awilix": "^6.1.0",
     "awilix-koa": "^6.0.0",
+    "babel-jest": "^27.5.1",
+    "jest": "^27.5.1",
     "koa": "^2.13.4",
+    "majestic": "^1.8.1",
     "mysql-curd": "^1.0.3",
     "ts-node-dev": "^1.1.8"
   }
