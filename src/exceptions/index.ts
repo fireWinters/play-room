@@ -25,9 +25,27 @@ export namespace ExceptionACG{
         errorCode = 10100
     }
 
-    export class NotPlayLink extends BaseExceotion{
+    export class MissPlayLink extends BaseExceotion{
         code = 204
         msg = '嗨呀～播放链接不见了'
         errorCode = 10101
+    }
+}
+
+/**
+ * 用户相关的异常
+ */
+export namespace ExceptionUser{
+
+    export class MissSign extends BaseExceotion{
+        code = 401
+        msg = 'sign已失效,请重新登录～'
+        errorCode = 20100;
+    }
+
+    export class MissUser extends BaseExceotion{
+        code = 403
+        msg = '当前sign已失效,请重新登录～'
+        errorCode = 20200
     }
 }

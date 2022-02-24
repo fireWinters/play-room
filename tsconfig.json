@@ -9,5 +9,5 @@
 
         "moduleResolution": "Node"
     },
-    "include": ["src/*", "code/*"]
+    "include": ["src/*", "code/*", "declare-d.ts"]
 }

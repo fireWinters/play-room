@@ -1,5 +1,5 @@
 import { Context } from "koa"
-import Log from "../../core/Log";
+import ServiceLog from "../services/ServiceLog";
 import {BaseExceotion} from "../exceptions";
 /**
  * 捕获全局异常的句柄，将错误信息统一的格式输出
@@ -19,7 +19,7 @@ export default async (ctx: Context, next: () => {}) => {
             const content = `${ctx.method} ${ctx.url}
 header: ${JSON.stringify(ctx.header)}`
             // 写入日志
-            Log.writeToDay(error, content)
+            ServiceLog.writeToDay(error, content)
         }
         ctx.state = code
         ctx.body = JSON.stringify(result)
