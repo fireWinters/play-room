@@ -1,8 +1,7 @@
 import { GET, route } from "awilix-koa";
 import { Context } from "koa";
-import {BaseExceotion} from "../exceptions";
 
-@route('/api')
+@route('/v1/api')
 export class ApiController{
 
     @route('/index')

@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer'
-import {ExceptionACG} from '../src/exceptions/index'
-import {interfaceACG} from '../src/interface/interfaceACG'
+import {ExceptionACG} from '../exceptions/index'
+import {interfaceACG} from '../interface/interfaceACG'
 
 
 /**
@@ -8,7 +8,7 @@ import {interfaceACG} from '../src/interface/interfaceACG'
  * 主站：https://www.agemys.com/
  * 备站：https://www.age.tv/
  */
-export class ACGTV{
+export class ServiceACGTV{
 
     /**
      * @params {string} 域名地址
@@ -79,10 +79,6 @@ export class ACGTV{
     }
 
     /**
-     * 
-     * 
-     */
-    /**
      * 根据站点播放详情页返回在线播放地址
      * @param url 站点的播放界面
      * @returns 视频的在线播放地址
@@ -94,16 +90,16 @@ export class ACGTV{
     static async getPlayLinkByUrl(url: string): Promise<string|never> {
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
-        await page.goto(url);
-        const playIFrameSrc = await page.evaluate(() => {
-            const iframe = document.querySelector('#age_playfram') as HTMLIFrameElement
-            return iframe.src
-        })
         try {
+            await page.goto(url);
+            const playIFrameSrc = await page.evaluate(() => {
+                const iframe = document.querySelector('#age_playfram') as HTMLIFrameElement
+                return iframe.src
+            })
             const query = playIFrameSrc.match(/\?url\=(.+$)/)![1]
             return decodeURIComponent(query)
         } catch(e) {
-            throw new ExceptionACG.NotPlayLink
+            throw new ExceptionACG.MissPlayLink()
         }
     }
 }

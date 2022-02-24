@@ -3,6 +3,7 @@ import { scopePerRequest, loadControllers } from 'awilix-koa'
 import exceptionHandle from './exceptions/ExceptionHandle'
 import withResultHandle from './controller/WithResultHandle'
 import Koa from 'koa'
+import config from './config'
 
 const app = new Koa() 
 
@@ -27,8 +28,8 @@ app.use(loadControllers(`${__dirname}/controller/*.ts`, {
 }))
 
 
-const ip: string = '127.0.0.1'
-const port: number = 3001
+const ip: string = config.runIp
+const port: number = config.runPort
 app.listen(port, ip, () => {
     console.log(`http://${ip}:${port}`)
 })
