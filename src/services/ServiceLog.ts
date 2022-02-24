@@ -17,6 +17,7 @@ export default class Log {
         const content = `${[date.getFullYear(), date.getMonth() + 1, date.getDate()].join('/')} ${[date.getHours(), date.getMinutes(), date.getSeconds()].join(':')} 
 ${other}
 ${error.stack}
+
 `
         writeFile(path, content, {flag: 'a'}, () => {})
     }
