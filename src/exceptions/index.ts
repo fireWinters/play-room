@@ -14,3 +14,20 @@ export class BaseExceotion extends Error{
         Object.setPrototypeOf(this, BaseExceotion.prototype)
     }
 }
+
+/**
+ * agetv站点的错误异常
+ */
+export namespace ExceptionACG{
+    export class NotDetail extends BaseExceotion{
+        code = 204
+        msg = '嗨呀～内容跑掉了'
+        errorCode = 10100
+    }
+
+    export class NotPlayLink extends BaseExceotion{
+        code = 204
+        msg = '嗨呀～播放链接不见了'
+        errorCode = 10101
+    }
+}

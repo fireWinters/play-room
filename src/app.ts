@@ -26,6 +26,7 @@ app.use(loadControllers(`${__dirname}/controller/*.ts`, {
     }
 }))
 
+
 const ip: string = '127.0.0.1'
 const port: number = 3001
 app.listen(port, ip, () => {
