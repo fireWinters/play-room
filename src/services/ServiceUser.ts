@@ -5,6 +5,15 @@ import config from '../config'
 import { ExceptionUser } from '../exceptions'
 
 export class ServiceUser{
+
+    /**
+     * 对普通的字符串进行hash加密
+     * @param pass {string} 需要加密的普通字符串
+     * @returns 加密后的64位hex字符
+     * ```
+     * ServiceUser.codePassword('123456') // 000c5e2e844afd8f13eb5ff595a7d613e272ec93d3996f1a3c43448b89ab1849
+     * ```
+     */
     static codePassword(pass: string): string {
         return new shajs.sha256()
         .update(`${config.hash}${pass}`)
@@ -12,13 +21,13 @@ export class ServiceUser{
     }
 
     /**
-     * 添加用户
+     * 添加用户并返回其新增的id
      * @param udata 
      * @returns 用户的新增id
      */
     static async createUser(udata: interfaceUser.detail): Promise<interfaceUser.detail> {
-        const insertId = await ModuleUser.insertUser(udata)
-        const _udata = Object.assign({insertId}, udata)
+        const id = await ModuleUser.insertUser(udata)
+        const _udata = Object.assign({id}, udata)
         return _udata
     }
 
@@ -49,7 +58,6 @@ export class ServiceUser{
         if (config.signTime !== 0 && _create_time + config.signTime > Date.now()) {
             throw new ExceptionUser.MissSign('登录已失效')
         }
-
         // 还原用户id
         const _codeId: number = parseInt('0x' + codeId)
         const _keyIndex: number = parseInt('0x' + keyIndex)
@@ -64,6 +72,11 @@ export class ServiceUser{
 
     /**
      * 对每个字符的ASCII码相加并返回
+     * @param str {string} 字符串
+     * @returns str字符串每个字符串的ASCII码相加后的结果
+     * ```
+     * ServiceUser.charCodeVal('ab')// a + b => 97 + 98 => 195
+     * ```
      */
     static charCodeVal(str: string): number{
         return str.split('').map((str: string) => {

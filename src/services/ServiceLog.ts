@@ -5,7 +5,7 @@ import {writeFile} from 'fs';
 export default class Log {
 
     // 日志保存的路径
-    static savePath = `${__dirname}/../runtime/log`
+    static savePath = `${__dirname}/../../runtime/log`
 
     /**
      * 将异常写入到当天的日志

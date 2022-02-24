@@ -6,6 +6,7 @@ import { Context } from "koa";
  */
 export default async(ctx: Context, next: () => {}) => {
     const result = await next()
+    //if (ctx.response.status === 404) { return }
     let content: {
         data: string|any[]|object;
         msg: string;
@@ -16,16 +17,17 @@ export default async(ctx: Context, next: () => {}) => {
         errorCode: 0
     }
     let code = 200
+    if (result === undefined || result === null || result === '') { code = 204 }
     if (typeof result === 'string') {
         content.data = result
         if (result === '') { code = 204 }
-    } else if (result.toString() === '[object Object]') {
+    } else if (Object.prototype.toString.call(result) === '[object Object]') {
         content.data = result
         if (Object.keys(result).length === 0) { code = 204 }
     } else if (result instanceof Array) {
         content.data = result
         if (result.length === 0) { code = 204 }
     }
-    ctx.state = code
     ctx.body = JSON.stringify(content)
+    ctx.status = code
 }

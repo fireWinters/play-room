@@ -1,7 +1,8 @@
 import {createContainer, Lifetime} from 'awilix'
 import { scopePerRequest, loadControllers } from 'awilix-koa'
 import exceptionHandle from './exceptions/ExceptionHandle'
-import withResultHandle from './controller/WithResultHandle'
+import withResultHandle from './controller/withResultHandle'
+import withTokenHandle from './controller/withTokenHandle'
 import Koa from 'koa'
 import config from './config'
 
@@ -13,6 +14,9 @@ app.use(exceptionHandle)
 // 统一返回的数据格式类型
 app.use(withResultHandle)
 
+// 登录校验
+app.use(withTokenHandle)
+
 // 创建容器
 const contriller = createContainer()
 
@@ -20,13 +24,12 @@ const contriller = createContainer()
 app.use(scopePerRequest(contriller))
 
 // 加载控制器路由
-app.use(loadControllers(`${__dirname}/controller/*.ts`, {
+app.use(loadControllers(`${__dirname}/controller/*/*.ts`, {
     formatName: 'camelCase',
     resolverOptions: {
         lifetime: Lifetime.SINGLETON
     }
 }))
-
 
 const ip: string = config.runIp
 const port: number = config.runPort

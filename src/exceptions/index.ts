@@ -49,3 +49,15 @@ export namespace ExceptionUser{
         errorCode = 20200
     }
 }
+
+/**
+ * token相关的异常
+ */
+ export namespace ExceptionToken{
+
+    export class Miss extends BaseExceotion{
+        code = 403
+        msg = '当前token不存在或已过期'
+        errorCode = 30100;
+    }
+}
