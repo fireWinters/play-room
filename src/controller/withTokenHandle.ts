@@ -6,7 +6,7 @@ import {ServiceToken} from '../services/ServiceToken'
  */
 export default async(ctx: Context, next: () => {}) => {
     
-    const fillterRouter = /(user\/token\b)|(user\/temporary\b)/i
+    const fillterRouter = /(token\/get\b)|(user\/temporary\b)/i
     if (fillterRouter.test(ctx.url) === true) {
         return await next()
     }
