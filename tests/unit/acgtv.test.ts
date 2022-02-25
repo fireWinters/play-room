@@ -56,5 +56,23 @@ describe('爬虫站点https://www.agemys.com的测试', () =>{
             expect(statu).toBe(true)
         })
     })
+
+    it('获取每个分集的播放链接正常流程', () => { // 
+        ServiceACGTV.getPlayLinkByUrl('https://www.agemys.com/play/20210155?playid=2_1')
+        .then(str => !!str)
+        .catch(err => err instanceof BaseExceotion)
+        .then(statu => {
+            expect(statu).toBe(true)
+        })
+    })
+
+    it('获取每个分集的播放链接异常流程', () => { // 一个错误的请求示例
+        ServiceACGTV.getPlayLinkByUrl('https://www.agemys.com/play/不存在的id')
+        .then(() => false)
+        .catch(err => err instanceof BaseExceotion)
+        .then(statu => {
+            expect(statu).toBe(true)
+        })
+    })
 })
 
