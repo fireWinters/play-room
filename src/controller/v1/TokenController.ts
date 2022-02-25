@@ -26,7 +26,7 @@ export class TokenController {
     *      errorCode: 0
     * }
     */
-    @route('/v1/user')
+    @route('/get')
     @GET()
     async get(ctx: Context): Promise<{token: string}>{
         const sign: string = ctx.header.sign as string
