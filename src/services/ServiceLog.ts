@@ -1,11 +1,17 @@
 import {writeFile} from 'fs';
+import {touchPath} from '../utils/utils'
+
+// 如果保存路径不存在则进行创建
+const savePath = `${__dirname}/../../runtime/log`
+touchPath(savePath)
+
 /**
  * 简单的日志写入类
  */
-export default class Log {
+export default class ServiceLog {
 
     // 日志保存的路径
-    static savePath = `${__dirname}/../../runtime/log`
+    static savePath = savePath
 
     /**
      * 将异常写入到当天的日志
