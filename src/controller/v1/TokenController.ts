@@ -9,8 +9,9 @@ export class TokenController {
 
     /**
     * @api {GET} /v1/token/get 根据sign码获取token
-    * @apiName 获取
+    * @apiName 获取token
     * @apiGroup Token
+    * @apiVersion 1.0.0
     * 
     * @apiSuccess  {Number} code 成功时返回 200
     * @apiHeaderExample {json} Header-Example:

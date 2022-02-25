@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only ./src/app.ts",
+    "apidoc": "apidoc -i src/controller/ -o apidoc/", 
     "test": "jest",
     "test:ui": "majestic"
   },
@@ -13,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/koa": "^2.13.4",
+    "apidoc": "^0.50.4",
     "awilix": "^6.1.0",
     "awilix-koa": "^6.0.0",
     "babel-jest": "^27.5.1",

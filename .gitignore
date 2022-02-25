@@ -1,3 +1,5 @@
 node_modules
 runtime/log/*
 coverage
+doc
+apidoc

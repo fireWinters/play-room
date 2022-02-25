@@ -1,27 +1,31 @@
 import { POST, GET, route } from "awilix-koa";
+import { Context } from "koa";
 import { interfaceUser } from "../../interface/interfacaUser";
 import { randomName, date } from "../../utils/utils";
-import {USER_LEVEL} from '../../menu/USER_LEVEL'
-import {ServiceUser} from '../../services/ServiceUser'
-import {ServiceToken} from '../../services/ServiceToken'
-import { Context } from "koa";
-import { ExceptionUser } from "../../exceptions";
+import {USER_LEVEL} from '../../menu/USER_LEVEL';
+import {ServiceUser} from '../../services/ServiceUser';
 
-
+/**
+ * 用户相关的模块
+ */
 @route('/v1/user')
 export class UserController{
-
+    
     /**
-     * 修改用户昵称
-     * @returns 
-     */
-    @route('/upname')
-    @POST()
-    async upname() {}
-
-    /**
-     * 注册临时用户
-     */
+    * @api {GET} /v1/users/temporary 注册临时用户
+    * @apiName 注册临时用户
+    * @apiGroup 用户相关
+    * @apiVersion 1.0.0
+    * 
+    * @apiSuccess  {Number} code 成功时返回 200
+    * 
+    * @apiSuccessExample {type} Success-Response:
+    * {
+    *      msg: 'ok',
+    *      data: {sign: '用来换取token的sign密钥，过期时间很长。用户修改了密码会失效'},
+    *      errorCode: 0
+    * }
+    */
     @route('/temporary')
     @GET()
     async autoRegister(): Promise<{sign: string}>{
@@ -38,15 +42,30 @@ export class UserController{
     }
 
     /**
-     * 根据sign码来获取token
-     */
-    @route('/token')
-    @GET()
-    async token(ctx: Context): Promise<{token: string}>{
-        const sign: string = ctx.header.sign as string
-        if (!sign) { throw new ExceptionUser.MissSign('sign不存在！') }
-        const udata = await ServiceUser.decodeLoginSign(sign)
-        const token = ServiceToken.login(udata)
-        return {token}
+    * @api {POST} /v1/users/upname 更新用户昵称
+    * @apiName 更新用户昵称
+    * @apiGroup 用户相关
+    * @apiVersion 1.0.0
+    * 
+    * @apiBody {String} nickname   用户昵称
+    * 
+    * @apiSuccess  {Number} code 成功时返回 200
+    * @apiHeaderExample {json} Header-Example:
+    * {
+    *   "token": "通过sign码可换取"
+    * }
+    *  
+    * @apiSuccessExample {type} Success-Response:
+    * {
+    *      msg: 'ok',
+    *      data: {nickname: '更新的用户名'},
+    *      errorCode: 0
+    * }
+    */
+    @route('/upname')
+    @POST()
+    async upname(ctx: Context) {
+        console.log(ctx.req)
     }
+
 }
