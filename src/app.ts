@@ -2,6 +2,7 @@ import {createContainer, Lifetime} from 'awilix'
 import { scopePerRequest, loadControllers } from 'awilix-koa'
 import exceptionHandle from './exceptions/ExceptionHandle'
 import withResultHandle from './controller/withResultHandle'
+import withResquestBodyHandle from './controller/withResquestBodyHandle'
 import withTokenHandle from './controller/withTokenHandle'
 import Koa from 'koa'
 import config from './config'
@@ -10,6 +11,9 @@ const app = new Koa()
 
 // 异常捕获
 app.use(exceptionHandle)
+
+// 请求体处理
+app.use(withResquestBodyHandle)
 
 // 统一返回的数据格式类型
 app.use(withResultHandle)

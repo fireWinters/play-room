@@ -8,8 +8,18 @@ const loginMap = new Map()
 export class ServiceToken{
 
     /**
+     * 获取token详情
+     * @param token {string} token键
+     * @returns 
+     */
+    static get(token: string): interfaceToken.detail|never{
+        this.hasIn(token)
+        return loginMap.get(token)
+    }
+
+    /**
      * 校验token是否有效
-     * @param token {string} 校验的token
+     * @param token {string} token键
      * @returns 不存在抛出异常
      */
     static hasIn(token: string): boolean|never {

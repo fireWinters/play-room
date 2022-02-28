@@ -4,6 +4,8 @@ import { interfaceUser } from "../../interface/interfacaUser";
 import { randomName, date } from "../../utils/utils";
 import {USER_LEVEL} from '../../menu/USER_LEVEL';
 import {ServiceUser} from '../../services/ServiceUser';
+import {ServiceToken} from '../../services/ServiceToken'
+import { ParamExceotion } from "../../exceptions";
 
 /**
  * 用户相关的模块
@@ -65,7 +67,12 @@ export class UserController{
     @route('/upname')
     @POST()
     async upname(ctx: Context) {
-        console.log(ctx.req)
+        const body = ctx.bodyJSON
+        if (!body?.nickname) { throw new ParamExceotion('nickname不能为空') }
+        if (/^(.{1,8})$/.test(body.nickname) === false) { throw new ParamExceotion(' nickname字数必须大于0且小于9') }
+        const token = ServiceToken.get(ctx.header.token as string)
+        const changedRows = await ServiceUser.upData(token.id, {nickname: body.nickname})
+        return {changedRows}
     }
 
 }

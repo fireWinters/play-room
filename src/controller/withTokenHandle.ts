@@ -16,6 +16,4 @@ export default async(ctx: Context, next: () => {}) => {
     ServiceToken.hasIn(token)
 
     await next()
-
-    console.log('通过流程')
 }

@@ -6,7 +6,6 @@ import { Context } from "koa";
  */
 export default async(ctx: Context, next: () => {}) => {
     const result = await next()
-    //if (ctx.response.status === 404) { return }
     let content: {
         data: string|any[]|object;
         msg: string;
@@ -17,6 +16,7 @@ export default async(ctx: Context, next: () => {}) => {
         errorCode: 0
     }
     let code = 200
+    console.log(result)
     if (result === undefined || result === null || result === '') { code = 204 }
     if (typeof result === 'string') {
         content.data = result

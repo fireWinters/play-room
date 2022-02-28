@@ -7,6 +7,31 @@ import { ExceptionUser } from '../exceptions'
 export class ServiceUser{
 
     /**
+     * 获取用户信息
+     * @param uid {number} 用户id
+     * @returns 用户信息
+     * ```
+     * const udata = ServiceUser.get(1) // 获取用户id为1的数据
+     * ```
+     */
+    static get(uid: number): Promise<interfaceUser.detail|never>{
+        return ModuleUser.find(uid)
+    }
+
+    /**
+     * 更新用户信息
+     * @param uid  {number} 用户id
+     * @param updata {object} 更新的字段对象
+     * @returns 更新的条目
+     * ```
+     * ServiceUser.upData(1, {nickname: '修改昵称'})
+     * ```
+     */
+    static upData(uid: number, updata: Partial<interfaceUser.detail>): void{
+        return ModuleUser.updata({id: uid}, updata)
+    }
+
+    /**
      * 对普通的字符串进行hash加密
      * @param pass {string} 需要加密的普通字符串
      * @returns 加密后的64位hex字符
